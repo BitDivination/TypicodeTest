@@ -1,0 +1,37 @@
+<!--User Info-->
+<div class="user-container">
+  <mat-card *ngIf="user$ | async as user; else noUser">
+    <mat-card-header><h1>{{ user.name }}</h1></mat-card-header>
+    <mat-card-content>
+      <div>
+        <span>Username: {{ user.username }}</span>
+        <span>eMail: {{ user.email }}</span>
+        <span>Phone: {{ user.phone }}</span>
+        <span>Website: {{ user.website }}</span>
+        <span>company: {{ user.company?.name }}</span>
+      </div>
+      <div>
+        <span>Address</span>
+        <span>{{ user.address.street }} <div *ngIf="user.address?.suite">{{ user.address.suite }}</div></span>
+        <span>{{ user.address.city }} {{user.address.zipcode}}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-template #noUser>
+    NO USER
+  </ng-template>
+</div>
+
+<!--Posts-->
+<div class="posts-container">
+  <ng-container *ngIf="posts$ | async as posts; else noPosts">
+    <ng-container *ngFor="let post of posts">
+      <app-post [post]="post"></app-post>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noPosts>
+    <h2>This User SO fresh, they don't have any posts!</h2>
+  </ng-template>
+</div>

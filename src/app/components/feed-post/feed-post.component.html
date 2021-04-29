@@ -1,0 +1,13 @@
+<ng-container *ngIf="feedPost$ | async as post">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-header>{{ post.post.title }}</mat-card-header>
+      <mat-card-subtitle *ngIf="post.user">
+        <a [routerLink]="[userPath, post.user.id]">{{ post.user.name }}</a>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      {{ post.post.body }}
+    </mat-card-content>
+  </mat-card>
+</ng-container>
